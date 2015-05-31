@@ -51,7 +51,8 @@ CREATE TABLE IF NOT EXISTS `lkp_survey_user_rel` (
 CREATE TABLE IF NOT EXISTS `questions` (
   `question_id` int(11) NOT NULL,
   `survey_id` int(11) NOT NULL,
-  `qtype_id` int(11) NOT NULL
+  `qtype_id` int(11) NOT NULL,
+  `question_text` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -192,7 +193,9 @@ ALTER TABLE `users`
 -- Constraints for table `answers`
 --
 ALTER TABLE `answers`
-  ADD CONSTRAINT `answers_fk1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `answers_fk1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `answers_fk2` FOREIGN KEY (`survey_id`) REFERENCES `surveys` (`survey_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `answers_fk3` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `questions`
@@ -212,3 +215,23 @@ ALTER TABLE `user_surveys`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE `answers` ADD PRIMARY KEY ( `user_id` , `survey_id` , `relation_id` ) ;
+
+-- Preset Values
+INSERT INTO `lkp_survey_user_rel` (`relation_id` ,`relation_name`)
+VALUES (1 , 'maker');
+
+INSERT INTO `lkp_survey_user_rel`(`relation_id`,`relation_name`)
+VALUES (2 , 'taker');
+
+INSERT INTO `question_type` (`qtype_id` ,`qtype_name`)
+VALUES (1 , 'True/False');
+
+INSERT INTO `question_type` (`qtype_id` ,`qtype_name`)
+VALUES (2 , 'Multiple Choice (4)');
+
+INSERT INTO `question_type` (`qtype_id` ,`qtype_name`)
+VALUES (3 , 'Fill In The Blank');
+
+
