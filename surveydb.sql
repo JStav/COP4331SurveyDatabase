@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `answers` (
   `question_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `survey_id` int(11) NOT NULL,
   `answer` varchar(2500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -112,9 +114,8 @@ CREATE TABLE IF NOT EXISTS `user_surveys` (
 --
 -- Indexes for table `answers`
 --
-ALTER TABLE `answers`
-  ADD PRIMARY KEY (`question_id`);
 
+ALTER TABLE `answers` ADD PRIMARY KEY ( `user_id` , `survey_id` , `question_id` ) ;
 --
 -- Indexes for table `lkp_survey_user_rel`
 --
@@ -216,7 +217,7 @@ ALTER TABLE `user_surveys`
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-ALTER TABLE `answers` ADD PRIMARY KEY ( `user_id` , `survey_id` , `relation_id` ) ;
+
 
 -- Preset Values
 INSERT INTO `lkp_survey_user_rel` (`relation_id` ,`relation_name`)
