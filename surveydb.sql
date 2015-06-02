@@ -107,6 +107,13 @@ CREATE TABLE IF NOT EXISTS `user_surveys` (
   `performed` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+ CREATE TABLE `question_options` (
+`option_id` INT NOT NULL ,
+`question_id` INT NOT NULL ,
+`option_text` VARCHAR( 100 ) NOT NULL ,
+PRIMARY KEY ( `option_id`,`question_id` )
+) ENGINE=InnoDB; 
 --
 -- Indexes for dumped tables
 --
@@ -217,7 +224,8 @@ ALTER TABLE `user_surveys`
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-
+ALTER TABLE `question_options`
+  ADD CONSTRAINT `question_options_fk1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- Preset Values
 INSERT INTO `lkp_survey_user_rel` (`relation_id` ,`relation_name`)
@@ -236,3 +244,4 @@ INSERT INTO `question_type` (`qtype_id` ,`qtype_name`)
 VALUES (3 , 'Fill In The Blank');
 
 
+ ALTER TABLE `question_options` CHANGE `option_id` `option_id` INT( 11 ) NOT NULL AUTO_INCREMENT 

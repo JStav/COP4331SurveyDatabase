@@ -13,9 +13,11 @@ VALUES ('1', '1', '1','Is this a good test?');
 INSERT INTO `questions` (`question_id` ,`survey_id` ,`qtype_id`,`question_text`)
 VALUES ('2', '1', '1','Second Question!');
 
- INSERT INTO `answers` (`question_id` ,`user_id`,`survey_id`,`answer`)
- VALUES ('1', '1','1','True');
- 
- INSERT INTO `answers` (`question_id` ,`user_id`,`survey_id`,`answer`)
- VALUES ('2', '1','1','False');
- 
+INSERT INTO `question_options` VALUES(1, 1, 'True');
+INSERT INTO `question_options` VALUES(2, 1, 'False');
+INSERT INTO `question_options` VALUES(3, 2, 'True');
+INSERT INTO `question_options` VALUES(4, 2, 'False');
+
+
+INSERT INTO `answers` VALUES(1, 1, 1, '1');
+INSERT INTO `answers` VALUES(2, 1, 1, '2');
