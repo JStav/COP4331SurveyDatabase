@@ -110,9 +110,10 @@ CREATE TABLE IF NOT EXISTS `user_surveys` (
 
  CREATE TABLE `question_options` (
 `option_id` INT NOT NULL ,
+`survey_id` int(11) NOT NULL,
 `question_id` INT NOT NULL ,
 `option_text` VARCHAR( 100 ) NOT NULL ,
-PRIMARY KEY ( `option_id`,`question_id` )
+PRIMARY KEY ( `option_id`,`question_id`,`survey_id` )
 ) ENGINE=InnoDB; 
 --
 -- Indexes for dumped tables
@@ -133,7 +134,7 @@ ALTER TABLE `lkp_survey_user_rel`
 -- Indexes for table `questions`
 --
 ALTER TABLE `questions`
-  ADD PRIMARY KEY (`question_id`),
+  ADD PRIMARY KEY (`question_id`,`survey_id`),
   ADD KEY `questions_fk1` (`qtype_id`),
   ADD KEY `questions_fk2` (`survey_id`);
 
@@ -174,10 +175,6 @@ ALTER TABLE `user_surveys`
 ALTER TABLE `lkp_survey_user_rel`
   MODIFY `relation_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `question_type`
 --
