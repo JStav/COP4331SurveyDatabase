@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 07, 2015 at 02:22 PM
+-- Generation Time: Jun 07, 2015 at 04:14 PM
 -- Server version: 5.1.57
 -- PHP Version: 5.2.17
 
@@ -24,6 +24,7 @@ CREATE TABLE `answers` (
   `user_id` int(11) NOT NULL,
   `survey_id` int(11) NOT NULL,
   `answer` varchar(2500) NOT NULL,
+  `ans_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`,`survey_id`,`question_id`),
   KEY `answers_fk1` (`question_id`),
   KEY `answers_fk2` (`survey_id`)
@@ -146,7 +147,7 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `users`
@@ -155,6 +156,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` VALUES(1, 'the.biri@gmail.com', 'FirstName', 'LastName', 'ceb6c970658f31504a901b89dcd3e461');
 INSERT INTO `users` VALUES(3, 'RDIBACCO@knights.ucf.edu', 'Richard', 'DiBacco', '827ccb0eea8a706c4c34a16891f84e7b');
 INSERT INTO `users` VALUES(4, 'alex@gmail.yo', 'alex', 'dibacco', '7694f4a66316e53c8cdd9d9954bd611d');
+INSERT INTO `users` VALUES(5, 'the.biri2@gmail.com', 'test2', 'test3', 'ceb6c970658f31504a901b89dcd3e461');
 
 -- --------------------------------------------------------
 
